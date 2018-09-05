@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CheckBrowser } from "../../helpers/check-browser.helper";
 import { WebrtcProvider } from '../../providers';
-
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 @Component({
   selector: 'page-home',
@@ -12,9 +12,26 @@ export class HomePage {
   public quote_id: number = 6;
   constructor(
     public navCtrl: NavController,
+    private androidPermissions: AndroidPermissions,
     public webrtcProvider: WebrtcProvider 
   ) {
-  }
+      let permissions_array = [
+        'CAMERA',
+        'CAPTURE_AUDIO_OUTPUT',
+        'CAPTURE_SECURE_VIDEO_OUTPUT',
+        'CAPTURE_VIDEO_OUTPUT',
+        'RECORD_AUDIO',
+      ]
+      for(let i = 0; i < permissions_array.length; i++) {
+        let permission = permissions_array[i];
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION[permission])
+          .then(
+            result => console.log('Has permission?',result.hasPermission),
+            err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION[permission])
+          );
+        this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION[permission], this.androidPermissions.PERMISSION.GET_ACCOUNTS]);
+      }
+    }
 
   conference() {
     if( CheckBrowser.isValid() ) {
