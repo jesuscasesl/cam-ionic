@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>camara</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -39,6 +39,10 @@
         <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.CAMERA" />
+            <uses-permission android:name="android.permission.RECORD_AUDIO" />
+        </config-file>
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -81,5 +85,8 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^2.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
+    <plugin name="cordova-plugin-media-capture" spec="^3.0.2" />
+    <plugin name="cordova-plugin-audioinput" spec="^1.0.1" />
+    <plugin name="cordova-plugin-media" spec="^5.0.2" />
     <engine name="android" spec="~7.0.0" />
 </widget>
