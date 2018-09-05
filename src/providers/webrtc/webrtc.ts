@@ -102,5 +102,13 @@ export class WebrtcProvider {
       });
     });
   }
-  
+  onLocalMediaError() {
+    return new Observable<any>(observer => {
+      this.webrtc.on('localMediaError', err => {
+        console.error('localMediaError: '+ err);
+      });
+    });
+  }
+
+
 }

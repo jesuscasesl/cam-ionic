@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { WebrtcProvider } from '../providers';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 
 @NgModule({
@@ -27,8 +28,8 @@ import { WebrtcProvider } from '../providers';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    WebrtcProvider
-    
+    WebrtcProvider,
+    AndroidPermissions
   ]
 })
 export class AppModule {}
