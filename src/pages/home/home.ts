@@ -12,28 +12,13 @@ export class HomePage{
   public quote_id: number = 6;
   constructor(
     public navCtrl: NavController,
-    private androidPermissions: AndroidPermissions,
     public webrtcProvider: WebrtcProvider
   ) {
-      let permissions_array = [
-        'CAMERA',
-        'CAPTURE_AUDIO_OUTPUT',
-        'CAPTURE_SECURE_VIDEO_OUTPUT',
-        'CAPTURE_VIDEO_OUTPUT',
-        'RECORD_AUDIO',
-      ]
-      for(let i = 0; i < permissions_array.length; i++) {
-        let permission = permissions_array[i];
-        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION[permission])
-          .then(
-            result => console.log('Has permission?',result.hasPermission),
-            err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION[permission])
-          );
-        this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION[permission], this.androidPermissions.PERMISSION.GET_ACCOUNTS]);
-      }
+
     }
 
   conference() {
+    alert('conference');
     this.goVideoCall( this.quote_id );
   }
 
@@ -45,12 +30,15 @@ export class HomePage{
       if ( quote_id ) {
         this.webrtcProvider.webrtc.joinRoom( quote_id.toString() );
       }
+      alert('ready');
       console.log('ready');
     });
     this.webrtcProvider.onLocalMediaError().subscribe((error) => {
+      alert(error);
       console.log('error');
     });
     this.webrtcProvider.onError().subscribe((error) => {
+      alert(error);
       console.log('error');
     });
 
