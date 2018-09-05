@@ -12,36 +12,35 @@ export class HomePage{
   public quote_id: number = 6;
   constructor(
     public navCtrl: NavController,
-    public webrtcProvider: WebrtcProvider,
-    private androidPermissions: AndroidPermissions
+    private androidPermissions: AndroidPermissions,
+    public webrtcProvider: WebrtcProvider
   ) {
-    let permissions_array = [
-      'CAMERA',
-      'CAPTURE_AUDIO_OUTPUT',
-      'CAPTURE_SECURE_VIDEO_OUTPUT',
-      'CAPTURE_VIDEO_OUTPUT',
-      'RECORD_AUDIO',
-    ]
-    for(let i = 0; i < permissions_array.length; i++) {
-      let permission = permissions_array[i];
-      this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION[permission]).then(
-        result => console.log('Has permission?',result.hasPermission),
-        err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION[permission])
-      );
-
-      this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION[permission], this.androidPermissions.PERMISSION.GET_ACCOUNTS]);
+      let permissions_array = [
+        'CAMERA',
+        'CAPTURE_AUDIO_OUTPUT',
+        'CAPTURE_SECURE_VIDEO_OUTPUT',
+        'CAPTURE_VIDEO_OUTPUT',
+        'RECORD_AUDIO',
+      ]
+      for(let i = 0; i < permissions_array.length; i++) {
+        let permission = permissions_array[i];
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION[permission])
+          .then(
+            result => console.log('Has permission?',result.hasPermission),
+            err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION[permission])
+          );
+        this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION[permission], this.androidPermissions.PERMISSION.GET_ACCOUNTS]);
+      }
     }
-  }
-
 
   conference() {
-    this.goVideoCall( this.quote_id );
-    // if( CheckBrowser.isValid() ) {
-    // } else {
-    //   // this.translateService.get('Su navegador no es compatible con la videoconferencia. Por favor, use Google Chrome, Mozilla Firefox o Microsoft Edge').subscribe((res: string) => {
-    //       // this.messageService.showErrorMessage(res);
-    //   // });
-    // }
+    if( CheckBrowser.isValid() ) {
+      this.goVideoCall( this.quote_id );
+    } else {
+      // this.translateService.get('Su navegador no es compatible con la videoconferencia. Por favor, use Google Chrome, Mozilla Firefox o Microsoft Edge').subscribe((res: string) => {
+          // this.messageService.showErrorMessage(res);
+      // });
+    }
   }
 
   goVideoCall( quote_id: number ){
