@@ -34,13 +34,7 @@ export class HomePage{
     }
 
   conference() {
-    if( CheckBrowser.isValid() ) {
-      this.goVideoCall( this.quote_id );
-    } else {
-      // this.translateService.get('Su navegador no es compatible con la videoconferencia. Por favor, use Google Chrome, Mozilla Firefox o Microsoft Edge').subscribe((res: string) => {
-          // this.messageService.showErrorMessage(res);
-      // });
-    }
+    this.goVideoCall( this.quote_id );
   }
 
   goVideoCall( quote_id: number ){
